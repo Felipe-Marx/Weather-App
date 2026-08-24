@@ -7,10 +7,17 @@ app = FastAPI()
 def home():
     return {"message": "Weather API"}
 
+
 @app.get("/weather/{nome_local}", response_model=Clima)
 def weather(nome_local:str):
-    localização = buscar_cidade(nome_local)
-    lat = localização["latitude"]
-    lon = localização["longitude"]
+    cidade = buscar_cidade(nome_local)
+    lat = cidade["latitude"]
+    lon = cidade["longitude"]
     resultado_clima = buscar_clima(lat, lon)
-    return resultado_clima
+    resultado = {
+        "cidade":cidade["name"],
+        "pais":cidade["country"],
+        "estado":cidade["state"],
+        **resultado_clima
+    }
+    return resultado

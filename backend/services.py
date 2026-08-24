@@ -31,9 +31,8 @@ def buscar_cidade(nome_local:str, pais:str = None, idioma:str = "pt"):
         else:
             raise HTTPException(status_code=404, detail="City not found")
             
-    except requests.exceptions.RequestException as e:
-        print(f"Erro na requisição: {e}")
-        return None
+    except requests.exceptions.RequestException:
+        raise HTTPException(status_code=503, detail="Weather service unavailable")
 
 def buscar_clima(lat:float, lon:float):
     params = {
@@ -64,6 +63,5 @@ def buscar_clima(lat:float, lon:float):
             "velocidade_vento": velocidade_vento
         }
 
-    except requests.exceptions.RequestException as e:
-        print(f"Erro na requisição: {e}")
-        return None
+    except requests.exceptions.RequestException:
+        raise HTTPException(status_code=503, detail="Weather service unavailable")
