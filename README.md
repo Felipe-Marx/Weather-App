@@ -45,7 +45,7 @@ weather-app/
 
 ```bash
 git clone https://github.com/Felipe-Marx/Weather-App
-cd Weather-app
+cd Weather-App
 ```
 
 ### 2. Instale as dependências
