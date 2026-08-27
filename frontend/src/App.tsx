@@ -15,14 +15,28 @@ function App() {
 
   const [clima, setClima] = useState<Clima | null>(null)
 
+  const [erro, setErro] = useState<string | null>(null)
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCidade(event.target.value)
   }
 
   const handleClick = async () => {
-    const resposta = await fetch(`http://127.0.0.1:8000/weather/${cidade}`)
-    const dados = await resposta.json()
-    setClima(dados)
+    try {
+      const resposta = await fetch(`http://127.0.0.1:8000/weather/${cidade}`)
+      const dados = await resposta.json()
+      
+      if (!resposta.ok){
+          setErro(dados.detail)
+          setClima(null)
+        }
+      else {
+          setClima(dados)
+          setErro(null)
+    }} catch(error) {
+          setErro("Falha na requisição")
+          setClima(null)
+        }
   }
   
   return (
@@ -44,6 +58,11 @@ function App() {
               <p>Umidade: {clima.umidade}</p>
               <p>Velocidade do vento: {clima.velocidade_vento}</p>
               </div>
+          )}
+          { erro && (
+            <div>
+              <p>Erro: {erro}</p>
+            </div>
           )}
         </div>
     </>
