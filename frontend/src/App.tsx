@@ -66,14 +66,31 @@ function App() {
 
         {clima && (
           <section className="weather">
-            <div>
-              <p>Cidade: {clima.cidade}</p>
-              <p>País: {clima.pais}</p>
-              <p>Estado: {clima.estado}</p>
-              <p>Temperatura: {clima.temperatura}</p>
-              <p>Umidade: {clima.umidade}</p>
-              <p>Velocidade do vento: {clima.velocidade_vento}</p>
-            </div>
+              <div className="weather-loc">
+                <div className="weather-city">
+                  <p>{clima.cidade}</p>
+                </div>
+                <div className="weather-location-detail">
+                  <p>{clima.pais} • {clima.estado}</p>
+                </div>
+              </div>
+              <div className="weather-info">
+                <div className="weather-item">
+                  <span className="weather-label">Temperatura</span>
+                  <strong className="weather-value">{clima.temperatura} °C</strong>
+                </div>
+
+                <div className="weather-item">
+                  <span className="weather-label">Umidade</span>
+                  <strong className="weather-value">{clima.umidade} %</strong>
+                </div>
+
+                <div className="weather-item">
+                  <span className="weather-label">Vento</span>
+                  <strong className="weather-value">{clima.velocidade_vento} km/h</strong>
+                </div>
+
+              </div>
           </section>
         )}
 
