@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
-
-interface Clima {
-  cidade: string;
-  pais: string;
-  estado: string;
-  temperatura: number;
-  umidade: number;
-  velocidade_vento: number;
-}
+import type { Clima } from "./types/weather"
+import WeatherInfo from "./components/WeatherInfo"
+import WeatherLocation from "./components/WeatherLocation"
 
 function App() {
   const [cidade, setCidade] = useState("");
@@ -66,38 +60,15 @@ function App() {
 
         {clima && (
           <section className="weather">
-              <div className="weather-loc">
-                <div className="weather-city">
-                  <p>{clima.cidade}</p>
-                </div>
-                <div className="weather-location-detail">
-                  <p>{clima.pais} • {clima.estado}</p>
-                </div>
-              </div>
-              <div className="weather-info">
-                <div className="weather-item">
-                  <span className="weather-label">Temperatura</span>
-                  <strong className="weather-value">{clima.temperatura} °C</strong>
-                </div>
-
-                <div className="weather-item">
-                  <span className="weather-label">Umidade</span>
-                  <strong className="weather-value">{clima.umidade} %</strong>
-                </div>
-
-                <div className="weather-item">
-                  <span className="weather-label">Vento</span>
-                  <strong className="weather-value">{clima.velocidade_vento} km/h</strong>
-                </div>
-
-              </div>
+            <WeatherLocation clima={clima} />
+            <WeatherInfo clima={clima} />
           </section>
         )}
 
         {erro && (
           <section className="error">
             <div>
-              <p>Erro: {erro}</p>
+              <p>Error: {erro}</p>
             </div>
           </section>
         )}
