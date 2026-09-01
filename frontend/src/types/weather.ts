@@ -14,5 +14,5 @@ export interface WeatherInfoProps {
 }
 
 export interface WeatherLocationProps {
-    clima: Clima
+  clima: Clima
 }

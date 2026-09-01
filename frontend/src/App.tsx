@@ -17,6 +17,12 @@ function App() {
     setCidade(event.target.value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == "Enter") {
+      handleClick();
+    }
+  }
+
   const handleClick = async () => {
     setLoading(true);
     try {
@@ -51,6 +57,7 @@ function App() {
               type="text"
               value={cidade}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
               disabled={loading}
             />
             <button onClick={handleClick} disabled={loading}>
