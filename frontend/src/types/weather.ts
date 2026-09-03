@@ -16,3 +16,10 @@ export interface WeatherInfoProps {
 export interface WeatherLocationProps {
   clima: Clima
 }
+
+export interface SearchProps {
+  onSearch: () => void
+  loading: boolean
+  cidade: string
+  handleChange:(event: React.ChangeEvent<HTMLInputElement>) => void
+}

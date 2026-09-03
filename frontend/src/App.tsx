@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import type { Clima } from "./types/weather"
-import WeatherInfo from "./components/WeatherInfo"
-import WeatherLocation from "./components/WeatherLocation"
+import type { Clima } from "./types/weather";
+import WeatherInfo from "./components/WeatherInfo";
+import WeatherLocation from "./components/WeatherLocation";
+import Search from "./components/Search";
 
 function App() {
   const [cidade, setCidade] = useState("");
@@ -16,12 +17,6 @@ function App() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCidade(event.target.value);
   };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key == "Enter") {
-      handleClick();
-    }
-  }
 
   const handleClick = async () => {
     setLoading(true);
@@ -49,39 +44,31 @@ function App() {
       <div className="app">
         <main>
           <header>
-          <h1>Weather App</h1>
+            <h1>Weather App</h1>
           </header>
 
-          <section className="search">
-            <input
-              type="text"
-              value={cidade}
-              onChange={handleChange}
-              onKeyDown={handleKeyDown}
-              disabled={loading}
-            />
-            <button onClick={handleClick} disabled={loading}>
-              {loading ? "Buscando..." : "Buscar"}
-            </button>
-          </section>
+          <Search
+            onSearch={handleClick}
+            cidade={cidade}
+            loading={loading}
+            handleChange={handleChange}
+          />
 
-        {clima && (
-          <section className="weather">
-            <WeatherLocation clima={clima} />
-            <WeatherInfo clima={clima} />
-          </section>
-        )}
+          {clima && (
+            <section className="weather">
+              <WeatherLocation clima={clima} />
+              <WeatherInfo clima={clima} />
+            </section>
+          )}
 
-        {erro && (
-          <section className="error">
-            <div>
-              <p>Error: {erro}</p>
-            </div>
-          </section>
-        )}
-        
+          {erro && (
+            <section className="error">
+              <div>
+                <p>Error: {erro}</p>
+              </div>
+            </section>
+          )}
         </main>
-
       </div>
     </>
   );
