@@ -19,6 +19,11 @@ function App() {
   };
 
   const handleClick = async () => {
+    if (cidade.trim() === "") {
+      setErro("O campo de busca está vazio!")
+      setClima(null)
+      return
+    }
     setLoading(true);
     try {
       const resposta = await fetch(`http://127.0.0.1:8000/weather/${cidade}`);
