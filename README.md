@@ -1,138 +1,178 @@
-# Weather API
+# Weather App
 
-Uma API REST desenvolvida em Python com FastAPI para consultar informações meteorológicas de uma cidade.
+Aplicação simples para consultar o clima de uma cidade em tempo real.
 
-A aplicação utiliza a API da Open-Meteo para localizar a cidade e obter os dados meteorológicos atuais.
+O projeto foi desenvolvido para praticar integração entre uma API em
+FastAPI e uma interface em React + TypeScript.
 
 ## Tecnologias
 
-- Python
-- FastAPI
-- Pydantic
-- Requests
-- Pytest
+### Backend
+
+-   Python
+-   FastAPI
+-   Pydantic
+-   Requests
+-   Pytest
+
+### Frontend
+
+-   React
+-   TypeScript
+-   Vite
+-   CSS
+
+### API de clima
+
+-   Open-Meteo
 
 ## Funcionalidades
 
-- Buscar informações meteorológicas por cidade
-- Obter temperatura atual
-- Obter umidade relativa do ar
-- Obter velocidade do vento
-- Identificar cidade, estado e país
-- Tratamento de cidades não encontradas
-- Tratamento de indisponibilidade do serviço externo
-- Testes automatizados
+-   Busca de cidades
+-   Temperatura atual
+-   Umidade
+-   Velocidade do vento
+-   Informações de país e estado
+-   Tratamento de cidade não encontrada
+-   Tratamento de falha na API
+-   Interface responsiva
+-   Testes automatizados para a API
 
-## Estrutura do projeto
+## Estrutura
 
-```text
-weather-app/
+``` text
+Weather App/
 ├── backend/
 │   ├── main.py
 │   ├── models.py
 │   ├── services.py
-│   └── tests/
+│   └── test/
 │       └── test_main.py
 │
-├── .gitignore
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Search.tsx
+│   │   │   ├── WeatherInfo.tsx
+│   │   │   └── WeatherLocation.tsx
+│   │   ├── types/
+│   │   │   └── weather.ts
+│   │   ├── App.tsx
+│   │   ├── App.css
+│   │   └── index.css
+│   └── package.json
+│
 ├── requirements.txt
 └── README.md
 ```
 
 ## Como executar
 
-### 1. Clone o repositório
+### Backend
 
-```bash
-git clone https://github.com/Felipe-Marx/Weather-App
-cd Weather-App
-```
+Entre na pasta do backend:
 
-### 2. Instale as dependências
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Execute a API
-
-Entre na pasta `backend`:
-
-```bash
+``` bash
 cd backend
 ```
 
-Execute:
+Crie o ambiente virtual:
 
-```bash
+``` bash
+python -m venv .venv
+```
+
+Ative o ambiente virtual no Windows:
+
+``` powershell
+.venv\Scriptsctivate
+```
+
+Instale as dependências:
+
+``` bash
+python -m pip install -r ..equirements.txt
+```
+
+Inicie a API:
+
+``` bash
 uvicorn main:app --reload
 ```
 
 A API estará disponível em:
 
-```text
+``` text
 http://127.0.0.1:8000
 ```
 
-A documentação interativa pode ser acessada em:
+### Frontend
 
-```text
-http://127.0.0.1:8000/docs
+Em outro terminal, entre na pasta do frontend:
+
+``` bash
+cd frontend
 ```
 
-## Endpoint
+Instale as dependências:
 
-### Consultar clima
+``` bash
+npm install
+```
 
-```http
+Inicie o projeto:
+
+``` bash
+npm run dev
+```
+
+O Vite exibirá no terminal o endereço para acessar a aplicação.
+
+## Testes
+
+Os testes do backend utilizam Pytest.
+
+Dentro da pasta `backend`:
+
+``` bash
+python -m pytest -v
+```
+
+Atualmente, o projeto possui testes para:
+
+-   consulta de clima;
+-   cidade não encontrada;
+-   indisponibilidade do serviço de clima.
+
+## API
+
+A aplicação possui uma rota principal:
+
+``` text
 GET /weather/{nome_local}
 ```
 
 Exemplo:
 
-```http
+``` text
 GET /weather/Fortaleza
 ```
 
 Resposta:
 
-```json
+``` json
 {
-    "cidade": "Fortaleza",
-    "pais": "Brazil",
-    "estado": "Ceará",
-    "temperatura": 28.5,
-    "umidade": 73,
-    "velocidade_vento": 14.2
+  "cidade": "Fortaleza",
+  "pais": "Brasil",
+  "estado": "Ceará",
+  "temperatura": 30.9,
+  "umidade": 52,
+  "velocidade_vento": 20.3
 }
 ```
 
-Os valores meteorológicos variam de acordo com as condições atuais.
+## Próximos passos
 
-## Tratamento de erros
-
-| Status | Descrição |
-|---|---|
-| `200` | Consulta realizada com sucesso |
-| `404` | Cidade não encontrada |
-| `503` | Serviço meteorológico indisponível |
-
-## Testes
-
-Os testes foram desenvolvidos utilizando Pytest.
-
-Para executar:
-
-```bash
-pytest
-```
-
-Atualmente são testados:
-
-- Consulta bem-sucedida
-- Cidade inexistente
-- Indisponibilidade da API externa
-
-## API externa
-
-Os dados meteorológicos são obtidos através da [Open-Meteo](https://open-meteo.com/).
+-   Adicionar condições climáticas e ícones
+-   Melhorar alguns detalhes da interface
+-   Deploy da aplicação
