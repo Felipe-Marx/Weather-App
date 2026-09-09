@@ -22,7 +22,6 @@ app.add_middleware(
 def home():
     return {"message": "Weather API"}
 
-
 @app.get("/weather/{nome_local}", response_model=Clima)
 def weather(nome_local:str):
     cidade = buscar_cidade(nome_local)

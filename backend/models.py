@@ -6,4 +6,4 @@ class Clima(BaseModel):
     estado: str
     temperatura: float
     umidade: int
-    velocidade_vento: float 
+    velocidade_vento: float

@@ -5,9 +5,9 @@ def buscar_cidade(nome_local:str, pais:str = None, idioma:str = "pt"):
     base_url = "https://geocoding-api.open-meteo.com/v1/search"
     
     params = {
-            "name": nome_local,
-            "language": idioma,
-            "count": 5
+        "name": nome_local,
+        "language": idioma,
+        "count": 5
         }
 
     if pais:

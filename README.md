@@ -85,13 +85,13 @@ python -m venv .venv
 Ative o ambiente virtual no Windows:
 
 ``` powershell
-.venv\Scriptsctivate
+.venv\Scripts\activate
 ```
 
 Instale as dependências:
 
 ``` bash
-python -m pip install -r ..equirements.txt
+python -m pip install -r ..\requirements.txt
 ```
 
 Inicie a API:
